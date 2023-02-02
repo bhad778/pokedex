@@ -5,12 +5,10 @@ const useStyles = (): StyleSheet => {
   const { theme } = useTheme();
 
   return {
-    searchInputContainer: {
-      backgroundColor: "red",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      paddingTop: 400,
+    container: {
+      backgroundColor: theme.color.backgroundColor,
+      minWidth: "100vw",
+      minHeight: "100vh",
     },
   };
 };

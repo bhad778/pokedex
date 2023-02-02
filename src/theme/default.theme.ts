@@ -1,7 +1,7 @@
 import { Theme, ThemeName } from "theme/types";
 
 export const DEFAULT_COLORS = {
-  backgroundColor: "#ff8267",
+  backgroundColor: "#F8F0E3",
 };
 
 export enum DEFAULT_SPACING {

@@ -1,8 +1,20 @@
 import React from "react";
-import styles from "./searchContainerStyles";
+import Search from "components/searchContainer/search";
+import Results from "components/searchContainer/results";
+
+import useStyles from "./searchContainerStyles";
 
 const SearchContainer = () => {
-  return <div style={styles.container}></div>;
+  const styles = useStyles();
+
+  return (
+    <div style={styles.container}>
+      <div style={styles.searchInputContainer}>
+        <Search />
+      </div>
+      <Results />
+    </div>
+  );
 };
 
 export default SearchContainer;
