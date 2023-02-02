@@ -6,7 +6,6 @@ const useStyles = (): StyleSheet => {
 
   return {
     searchInputContainer: {
-      backgroundColor: "red",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",

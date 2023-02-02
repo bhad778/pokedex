@@ -1,14 +1,12 @@
 import { StyleSheet } from "types/AppTypes";
+import { useTheme } from "theme/theme.context";
 
-const styles: StyleSheet = {
-  container: {
-    listStyleType: "none",
-    margin: 0,
-    padding: 0,
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-  },
+const useStyles = (): StyleSheet => {
+  const { theme } = useTheme();
+
+  return {
+    container: {},
+  };
 };
 
-export default styles;
+export default useStyles;

@@ -1,14 +1,29 @@
 import { StyleSheet } from "types/AppTypes";
+import { useTheme } from "theme/theme.context";
 
-const styles: StyleSheet = {
-  container: {
-    listStyleType: "none",
-    margin: 0,
-    padding: 0,
-    display: "flex",
-    flexDirection: "row",
-    width: "100%",
-  },
+const useStyles = (): StyleSheet => {
+  const { theme } = useTheme();
+
+  return {
+    container: {
+      width: "100%",
+      minHeight: "500px",
+      marginTop: 30,
+      display: "flex",
+      justifyContent: "center",
+    },
+    pokemonCardsContainer: {
+      width: "1000px",
+      minHeight: "500px",
+    },
+    pokemonCardsList: {
+      display: "flex",
+      justifyContent: "center",
+      flexWrap: "wrap",
+      gap: "10px 10px",
+      paddingBottom: "100px",
+    },
+  };
 };
 
-export default styles;
+export default useStyles;
