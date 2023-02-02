@@ -15,20 +15,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "./",
-    "paths": {
-      "*": ["src/*"],
-      "assets/*": ["src/assets/*"],
-      "components/*": ["src/components/*"],
-      "modals/*": ["src/modals/*"],
-      "navigation/*": ["src/navigation/*"],
-      "screens/*": ["src/screens/*"],
-      "services/*": ["src/services/*"],
-      "reduxStore/*": ["src/reduxStore/*"],
-      "theme/*": ["src/theme/*"],
-      "types/*": ["src/types/*"],
-      "utils/*": ["src/utils/*"]
-    }
+    "baseUrl": "src"
   },
   "include": ["src"]
 }
