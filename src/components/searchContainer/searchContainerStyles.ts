@@ -18,6 +18,9 @@ const useStyles = (): StyleSheet => {
       fontSize: "50px",
       color: theme.color.fairy,
     },
+    resultsContainer: {
+      // paddingBottom: "40px",
+    },
   };
 };
 

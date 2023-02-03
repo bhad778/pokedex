@@ -7,19 +7,20 @@ const useStyles = (): StyleSheet => {
   return {
     container: {
       width: "100%",
+      minHeight: "500px",
       marginTop: 30,
       display: "flex",
       justifyContent: "center",
     },
     pokemonCardsContainer: {
       width: "1000px",
+      minHeight: "500px",
     },
     pokemonCardsList: {
       display: "flex",
-      justifyContent: "center",
       flexWrap: "wrap",
       gap: "20px 15px",
-      paddingBottom: "10px",
+      paddingBottom: "100px",
     },
   };
 };

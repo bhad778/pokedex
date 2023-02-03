@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Search from "components/searchContainer/search";
 import Results from "components/searchContainer/results";
+import PastSearches from "components/searchContainer/pastSearches";
 import { PokemonClient } from "pokenode-ts";
 import { Pokemon } from "pokenode-ts";
 import { RootState } from "reduxStore/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setPokemonSearchResults } from "reduxStore/pokemonSearch/pokemonSearchSlice";
+import { setPokemonSearchResults, addPastSearch } from "reduxStore/pokemonSearch/pokemonSearchSlice";
 import useDebounce from "utils/useDebounce";
 
 import useStyles from "./searchContainerStyles";
@@ -31,6 +32,7 @@ const SearchContainer = () => {
     const pokemonResponse: Pokemon = await api.getPokemonByName(searchText);
 
     dispatch(setPokemonSearchResults(pokemonResponse));
+    dispatch(addPastSearch(pokemonResponse));
   };
 
   const styles = useStyles();
@@ -41,7 +43,12 @@ const SearchContainer = () => {
         <div style={styles.title}>Clefairydex</div>
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
-      <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} />
+      <div style={styles.resultsContainer}>
+        <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} />
+      </div>
+      <div style={styles.resultsContainer}>
+        <PastSearches />
+      </div>
     </div>
   );
 };
