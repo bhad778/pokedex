@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useState } from "react";
-import { Pokemon } from "pokenode-ts";
+import React, { memo, useCallback, useEffect, useState } from "react";
+import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts";
 import { capitalizeFirstLetter } from "utils/commonUtils";
 import { Spinner } from "@chakra-ui/react";
 import { Tag } from "@chakra-ui/react";
@@ -15,21 +15,44 @@ const PokemonDetails = (props: PokemonDetailsProps) => {
   const { pokemon } = props;
 
   const [loading, setLoading] = useState(true);
+  const [speciesData, setSpeciesData] = useState<PokemonSpecies | undefined>();
 
   const styles = useStyles();
+
+  const api = new PokemonClient();
 
   const onImageLoaded = useCallback(() => {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    getSpecies();
+  }, []);
+
+  const getSpecies = async () => {
+    const response = await api.getPokemonSpeciesByName(pokemon?.name || "");
+    setSpeciesData(response);
+  };
+
   const returnTypeTags = () => {
     return pokemon?.types.map((item: any) => {
-      console.log("typeColors[item.type.name as types]", typeColors[item.type.name as types]);
       return (
         <Tag marginLeft="1" backgroundColor={typeColors[item.type.name as types]}>
           {item.type.name}
         </Tag>
       );
+    });
+  };
+
+  const returnAbilities = () => {
+    return pokemon?.abilities.map((item: any) => {
+      return <div>{item.ability.name}</div>;
+    });
+  };
+
+  const returnMoves = () => {
+    return pokemon?.moves.map((item: any) => {
+      return <div>{item.move.name}</div>;
     });
   };
 
@@ -44,9 +67,21 @@ const PokemonDetails = (props: PokemonDetailsProps) => {
         <img src={pokemon?.sprites?.front_shiny || undefined} width="250px" height="250px" />
       </div>
       <div style={styles.details}>
-        <div style={styles.abilities}>abilities</div>
-        <div style={styles.moves}>moves</div>
-        <div style={styles.species}>species</div>
+        <div style={styles.abilities}>
+          <div style={styles.statTitle}>Abilities</div>
+          <div>{returnAbilities()}</div>
+        </div>
+        <div style={styles.moves}>
+          <div style={styles.statTitle}>Moves</div>
+          <div>{returnMoves()}</div>
+        </div>
+        <div style={styles.species}>
+          <div style={styles.statTitle}>Species</div>
+          <div>Is baby: {speciesData?.is_baby ? "true" : "false"}</div>
+          <div>Is legendary: {speciesData?.is_legendary ? "true" : "false"}</div>
+          <div>Happiness: {speciesData?.base_happiness}</div>
+          <div>Capture Rate: {speciesData?.capture_rate}</div>
+        </div>
       </div>
     </div>
   );

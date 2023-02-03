@@ -9,6 +9,7 @@ const useStyles = (): StyleSheet => {
     pokemonName: {
       textAlign: "center",
       fontSize: "30px",
+      fontWeight: "bold",
     },
     types: {
       textAlign: "center",
@@ -31,6 +32,10 @@ const useStyles = (): StyleSheet => {
     species: {
       flex: 1,
       textAlign: "center",
+    },
+    statTitle: {
+      fontSize: "18px",
+      fontWeight: "bold",
     },
   };
 };
