@@ -11,7 +11,7 @@ import useDebounce from "utils/useDebounce";
 import PokemonDetails from "components/pokemonDetails";
 
 import useStyles from "./searchContainerStyles";
-import { Modal, ModalOverlay } from "@chakra-ui/react";
+import { Modal, ModalContent, ModalOverlay } from "@chakra-ui/react";
 
 const SearchContainer = () => {
   const [searchText, setSearchText] = useState("");
@@ -57,9 +57,11 @@ const SearchContainer = () => {
       <div style={styles.resultsContainer}>
         <PastSearches setSelectedPokemon={setSelectedPokemon} />
       </div>
-      <Modal isOpen={!!selectedPokemon} onClose={closePokemonDetailsModal}>
+      <Modal isOpen={!!selectedPokemon} size="xl" onClose={closePokemonDetailsModal}>
         <ModalOverlay />
-        <PokemonDetails pokemon={selectedPokemon} />
+        <ModalContent>
+          <PokemonDetails pokemon={selectedPokemon} />
+        </ModalContent>
       </Modal>
     </div>
   );

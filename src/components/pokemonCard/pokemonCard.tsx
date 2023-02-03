@@ -3,6 +3,7 @@ import { Card } from "@chakra-ui/react";
 import { Pokemon } from "pokenode-ts";
 import { types } from "types/AppTypes";
 import { Spinner } from "@chakra-ui/react";
+import { capitalizeFirstLetter } from "utils/commonUtils";
 
 import useStyles from "./pokemonCardStyles";
 
@@ -30,10 +31,6 @@ const PokemonCard = (props: PokemonCardProps) => {
   }
 
   const styles = useStyles(pokemonTypes, height, width);
-
-  const capitalizeFirstLetter = useCallback((name: string) => {
-    return name.charAt(0).toUpperCase() + name.slice(1);
-  }, []);
 
   const onImageLoaded = useCallback(() => {
     setLoading(false);
