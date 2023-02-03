@@ -10,6 +10,7 @@ const useStyles = (typesArray: Array<types>): StyleSheet => {
       width: "320px",
       height: "300px",
       justifyContent: "center",
+      alignItems: "center",
       background: `linear-gradient(135deg, ${typeColors[typesArray[0]]}, ${typeColors[typesArray[1]]})`,
     },
     pokemonName: {

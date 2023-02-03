@@ -9,7 +9,14 @@ const useStyles = (): StyleSheet => {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      paddingTop: 400,
+      flexDirection: "column",
+      paddingTop: 200,
+    },
+    title: {
+      position: "absolute",
+      top: "100px",
+      fontSize: "50px",
+      color: theme.color.fairy,
     },
   };
 };

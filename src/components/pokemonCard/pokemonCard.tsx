@@ -1,7 +1,8 @@
-import React, { memo, useCallback } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { Pokemon } from "pokenode-ts";
 import { types } from "types/AppTypes";
+import { Spinner } from "@chakra-ui/react";
 
 import useStyles from "./pokemonCardStyles";
 
@@ -11,6 +12,8 @@ interface PokemonCardProps {
 
 const PokemonCard = (props: PokemonCardProps) => {
   const { pokemon } = props;
+
+  const [loading, setLoading] = useState(true);
 
   // convert type to just array of strings
   const pokemonTypes: Array<types> = [];
@@ -29,10 +32,15 @@ const PokemonCard = (props: PokemonCardProps) => {
     return name.charAt(0).toUpperCase() + name.slice(1);
   }, []);
 
+  const onImageLoaded = useCallback(() => {
+    setLoading(false);
+  }, []);
+
   return (
     <Card style={styles.pokemonCard}>
       <span style={styles.pokemonName}>{capitalizeFirstLetter(pokemon.name)}</span>
-      <img src={pokemon?.sprites?.front_default || undefined} width="100%" height="100%" />
+      {loading && <Spinner />}
+      <img src={pokemon?.sprites?.front_default || undefined} onLoad={onImageLoaded} width="100%" height="100%" />
     </Card>
   );
 };
