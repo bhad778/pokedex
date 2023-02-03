@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useState } from "react";
 import { Card } from "@chakra-ui/react";
-import { Pokemon } from "pokenode-ts";
+import { Pokemon } from "types/AppTypes";
 import { types } from "types/AppTypes";
 import { Spinner } from "@chakra-ui/react";
 import { capitalizeFirstLetter } from "utils/commonUtils";

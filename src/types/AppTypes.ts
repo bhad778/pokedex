@@ -1,6 +1,10 @@
+import { Pokemon as PokemonType } from "pokenode-ts";
+
 export interface StyleSheet {
   [key: string]: React.CSSProperties;
 }
+
+export type Pokemon = PokemonType & { evolutions?: Pokemon[] };
 
 export enum typeColors {
   "normal" = "#A8A878",

@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import PokemonCard from "components/pokemonCard";
-import { Pokemon } from "pokenode-ts";
+import { Pokemon } from "types/AppTypes";
 
 import useStyles from "./resultsStyles";
 

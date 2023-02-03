@@ -1,4 +1,4 @@
-import { Pokemon } from "pokenode-ts";
+import { Pokemon } from "types/AppTypes";
 
 export type TPokemonSearchData = {
   pokemonSearchResults: Pokemon;

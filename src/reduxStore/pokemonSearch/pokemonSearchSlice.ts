@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { TPokemonSearchData } from "./pokemonSearchTypes";
-import { Pokemon } from "pokenode-ts";
+import { Pokemon } from "types/AppTypes";
 
 const initialState: TPokemonSearchData = {
   pokemonSearchResults: {

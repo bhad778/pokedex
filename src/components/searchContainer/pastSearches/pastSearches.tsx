@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
 import PokemonCard from "components/pokemonCard";
-import { Pokemon } from "pokenode-ts";
+import { Pokemon } from "types/AppTypes";
 import { useSelector } from "react-redux";
 import { RootState } from "reduxStore/store";
 

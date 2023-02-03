@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import Search from "components/searchContainer/search";
 import Results from "components/searchContainer/results";
 import PastSearches from "components/searchContainer/pastSearches";
-import { PokemonClient, EvolutionClient } from "pokenode-ts";
-import { Pokemon } from "pokenode-ts";
+import { PokemonClient, EvolutionClient, ChainLink } from "pokenode-ts";
+import { Pokemon } from "types/AppTypes";
 import { RootState } from "reduxStore/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setPokemonSearchResults, addPastSearch } from "reduxStore/pokemonSearch/pokemonSearchSlice";
@@ -29,21 +29,58 @@ const SearchContainer = () => {
   useEffect(() => {
     if (searchText) {
       getPokemon(searchText);
-      getEvolutions();
     }
   }, [debouncedValue]);
 
   const getPokemon = async (searchText: string) => {
-    const pokemonResponse: Pokemon = await pokemonApi.getPokemonByName(searchText);
+    const getPokemonPromise = pokemonApi.getPokemonByName(searchText);
+    const getSpeciesPromise = pokemonApi.getPokemonSpeciesByName(searchText);
 
-    dispatch(setPokemonSearchResults(pokemonResponse));
-    dispatch(addPastSearch(pokemonResponse));
+    Promise.all([getPokemonPromise, getSpeciesPromise]).then((values) => {
+      // extract evolutionId from url
+      let evolutionChainUrl = values[1].evolution_chain.url;
+      evolutionChainUrl = evolutionChainUrl.slice(0, -1);
+      let n = evolutionChainUrl.lastIndexOf("/");
+      let chainId = evolutionChainUrl.substring(n + 1);
+
+      // call this once getPokemonByName is done
+      // because  we need id to make this call
+      getEvolutions(parseInt(chainId));
+
+      dispatch(setPokemonSearchResults(values[0]));
+      dispatch(addPastSearch(values[0]));
+    });
   };
 
-  const getEvolutions = async () => {
-    const pokemonResponse = await evolutionApi.getEvolutionChainById(1);
+  const getEvolutions = async (id: number) => {
+    const pokemonResponse = await evolutionApi.getEvolutionChainById(id);
 
-    // NEED TO LOOP OVER
+    let evolutionNames: string[] = [];
+
+    const buildEvolvePokemonArray = (chainLink: ChainLink) => {
+      evolutionNames.push(chainLink?.species.name);
+      if (chainLink?.evolves_to[0]?.evolves_to) {
+        // recursively call until all evolution names are extracted
+        buildEvolvePokemonArray(chainLink.evolves_to[0]);
+      }
+    };
+
+    // if pokemon has evolution, get evolution data
+    if (pokemonResponse?.chain?.evolves_to) {
+      buildEvolvePokemonArray(pokemonResponse.chain);
+    }
+
+    // remove searched pokemon from evolution list
+    evolutionNames = evolutionNames.filter((e) => e !== searchText);
+
+    let pokemonPromises: any[] = [];
+    evolutionNames.map((evolution: string) => {
+      pokemonPromises.push(pokemonApi.getPokemonByName(evolution));
+    });
+
+    Promise.all(pokemonPromises).then((values) => {
+      console.log(values);
+    });
 
     console.log(pokemonResponse);
   };
