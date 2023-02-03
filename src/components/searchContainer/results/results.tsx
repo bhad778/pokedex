@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import PokemonCard from "components/pokemonCard";
 import { Pokemon } from "pokenode-ts";
 
@@ -14,21 +14,22 @@ const Results = (props: ResultsProps) => {
 
   const styles = useStyles();
 
-  const PokemonCardsList = () => {
+  const PokemonCardsList = memo((props: any) => {
+    const { pokemonSearchResults } = props;
     return (
       <div style={styles.pokemonCardsList}>
         <PokemonCard pokemon={pokemonSearchResults} />
       </div>
     );
-  };
+  });
 
   return (
     <div style={styles.container}>
       <div style={styles.pokemonCardsContainer}>
-        <PokemonCardsList />
+        <PokemonCardsList pokemonSearchResults={pokemonSearchResults} />
       </div>
     </div>
   );
 };
 
-export default Results;
+export default memo(Results);

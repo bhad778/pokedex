@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { Pokemon } from "pokenode-ts";
 import { types } from "types/AppTypes";
@@ -31,10 +31,10 @@ const PokemonCard = (props: PokemonCardProps) => {
 
   return (
     <Card style={styles.pokemonCard}>
-      <span>{capitalizeFirstLetter(pokemon.name)}</span>
+      <span style={styles.pokemonName}>{capitalizeFirstLetter(pokemon.name)}</span>
       <img src={pokemon?.sprites?.front_default || undefined} width="100%" height="100%" />
     </Card>
   );
 };
 
-export default PokemonCard;
+export default memo(PokemonCard);

@@ -19,19 +19,22 @@ const SearchContainer = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (searchText) {
+      debounceGetPokemon(searchText);
+    }
+  }, [searchText]);
+
   const getPokemon = async () => {
     const pokemonResponse: Pokemon = await api.getPokemonByName(searchText);
 
     dispatch(setPokemonSearchResults(pokemonResponse));
   };
 
-  useEffect(() => {
-    if (searchText) {
-      getPokemon();
-    }
-  }, [searchText]);
-
-  const debounceGetPokemon = useCallback(debounce(getPokemon, 500), []);
+  const debounceGetPokemon = useCallback(
+    debounce(() => getPokemon(), 500),
+    [searchText]
+  );
 
   const styles = useStyles();
 
@@ -40,7 +43,7 @@ const SearchContainer = () => {
       <div style={styles.searchInputContainer}>
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
-      <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} />
+      {pokemonSearchResults && <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} />}
     </div>
   );
 };
