@@ -6,7 +6,7 @@ import { PokemonClient, EvolutionClient, ChainLink } from "pokenode-ts";
 import { Pokemon } from "types/AppTypes";
 import { RootState } from "reduxStore/store";
 import { useSelector, useDispatch } from "react-redux";
-import { setPokemonSearchResults, addPastSearch } from "reduxStore/pokemonSearch/pokemonSearchSlice";
+import { setPokemonSearchResults, addPastSearch, setEvolutionData } from "reduxStore/pokemonSearch/pokemonSearchSlice";
 import useDebounce from "utils/useDebounce";
 import PokemonDetails from "components/pokemonDetails";
 
@@ -78,11 +78,9 @@ const SearchContainer = () => {
       pokemonPromises.push(pokemonApi.getPokemonByName(evolution));
     });
 
-    Promise.all(pokemonPromises).then((values) => {
-      console.log(values);
+    Promise.all(pokemonPromises).then((evolutions) => {
+      dispatch(setEvolutionData(evolutions));
     });
-
-    console.log(pokemonResponse);
   };
 
   const closePokemonDetailsModal = useCallback(() => {

@@ -375,9 +375,12 @@ export const pokemonSearchSlice = createSlice({
     addPastSearch: (state, action: PayloadAction<Pokemon>) => {
       state.pastSearches = [...state.pastSearches, action.payload];
     },
+    setEvolutionData: (state, action: PayloadAction<Pokemon[]>) => {
+      state.pokemonSearchResults.evolutions = action.payload;
+    },
   },
 });
 
-export const { resetPokemonSearchResults, setPokemonSearchResults, addPastSearch } = pokemonSearchSlice.actions;
+export const { resetPokemonSearchResults, setPokemonSearchResults, addPastSearch, setEvolutionData } = pokemonSearchSlice.actions;
 
 export default pokemonSearchSlice.reducer;

@@ -21,6 +21,9 @@ const useStyles = (): StyleSheet => {
       gap: "20px 15px",
       paddingBottom: "10px",
     },
+    evolutionContainer: {
+      marginRight: "10px",
+    },
   };
 };
 

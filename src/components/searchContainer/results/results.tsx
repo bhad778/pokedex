@@ -15,11 +15,24 @@ const Results = (props: ResultsProps) => {
 
   const styles = useStyles();
 
+  const returnEvolutionCards = () => {
+    if (pokemonSearchResults.evolutions) {
+      return pokemonSearchResults.evolutions.map((evolution: Pokemon) => {
+        return (
+          <span style={styles.evolutionContainer}>
+            <PokemonCard pokemon={evolution} setSelectedPokemon={setSelectedPokemon} height={100} width={110} />
+          </span>
+        );
+      });
+    }
+  };
+
   const PokemonCardsList = memo((props: any) => {
     const { pokemonSearchResults } = props;
     return (
       <div style={styles.pokemonCardsList}>
         <PokemonCard pokemon={pokemonSearchResults} setSelectedPokemon={setSelectedPokemon} height={300} width={320} />
+        <div style={styles.evolutions}>{returnEvolutionCards()}</div>
       </div>
     );
   });
