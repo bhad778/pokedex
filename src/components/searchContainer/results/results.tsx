@@ -5,7 +5,6 @@ import { Pokemon } from "types/AppTypes";
 import useStyles from "./resultsStyles";
 
 interface ResultsProps {
-  searchText: string;
   pokemonSearchResults: Pokemon;
   setSelectedPokemon: (pokemon: Pokemon | undefined) => void;
 }

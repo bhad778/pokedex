@@ -96,7 +96,7 @@ const SearchContainer = () => {
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
       <div style={styles.resultsContainer}>
-        <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} setSelectedPokemon={setSelectedPokemon} />
+        <Results pokemonSearchResults={pokemonSearchResults} setSelectedPokemon={setSelectedPokemon} />
       </div>
       <div style={styles.resultsContainer}>
         <PastSearches setSelectedPokemon={setSelectedPokemon} />
