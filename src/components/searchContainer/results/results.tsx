@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo } from "react";
 import PokemonCard from "components/pokemonCard";
 import { Pokemon } from "pokenode-ts";
 
@@ -10,7 +10,7 @@ interface ResultsProps {
 }
 
 const Results = (props: ResultsProps) => {
-  const { searchText, pokemonSearchResults } = props;
+  const { pokemonSearchResults } = props;
 
   const styles = useStyles();
 
@@ -18,7 +18,7 @@ const Results = (props: ResultsProps) => {
     const { pokemonSearchResults } = props;
     return (
       <div style={styles.pokemonCardsList}>
-        <PokemonCard pokemon={pokemonSearchResults} />
+        <PokemonCard pokemon={pokemonSearchResults} height={300} width={320} />
       </div>
     );
   });

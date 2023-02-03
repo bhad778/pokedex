@@ -16,7 +16,7 @@ const PastSearches = () => {
     return (
       <div style={styles.pokemonCardsList}>
         {pastSearches.map((pokemon: Pokemon) => (
-          <PokemonCard pokemon={pokemon} />
+          <PokemonCard pokemon={pokemon} height={130} width={150} />
         ))}
       </div>
     );

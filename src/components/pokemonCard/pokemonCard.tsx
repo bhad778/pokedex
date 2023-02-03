@@ -8,10 +8,12 @@ import useStyles from "./pokemonCardStyles";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
+  height: number;
+  width: number;
 }
 
 const PokemonCard = (props: PokemonCardProps) => {
-  const { pokemon } = props;
+  const { pokemon, height, width } = props;
 
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +28,7 @@ const PokemonCard = (props: PokemonCardProps) => {
     pokemonTypes.push(pokemonTypes[0]);
   }
 
-  const styles = useStyles(pokemonTypes);
+  const styles = useStyles(pokemonTypes, height, width);
 
   const capitalizeFirstLetter = useCallback((name: string) => {
     return name.charAt(0).toUpperCase() + name.slice(1);

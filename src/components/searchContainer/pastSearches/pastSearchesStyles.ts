@@ -21,6 +21,7 @@ const useStyles = (): StyleSheet => {
       flexWrap: "wrap",
       gap: "20px 15px",
       paddingBottom: "100px",
+      justifyContent: "center",
     },
   };
 };
