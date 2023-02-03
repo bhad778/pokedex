@@ -92,7 +92,7 @@ const SearchContainer = () => {
   return (
     <div style={styles.container}>
       <div style={styles.searchInputContainer}>
-        <div style={styles.title}>Clefairydex</div>
+        <div style={styles.title}>Clefairypedia</div>
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
       <div style={styles.resultsContainer}>
