@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Search from "components/searchContainer/search";
 import Results from "components/searchContainer/results";
 import PastSearches from "components/searchContainer/pastSearches";
-import { PokemonClient } from "pokenode-ts";
+import { PokemonClient, EvolutionClient } from "pokenode-ts";
 import { Pokemon } from "pokenode-ts";
 import { RootState } from "reduxStore/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,27 +16,36 @@ import { Modal, ModalContent, ModalOverlay } from "@chakra-ui/react";
 const SearchContainer = () => {
   const [searchText, setSearchText] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | undefined>();
-  // const [isPokemonDetailsModalOpen, setIsPokemonDetailsModalOpen] = useState(false);
 
   const debouncedValue = useDebounce<string>(searchText, 500);
 
   const pokemonSearchResults = useSelector((state: RootState) => state.pokemonSearchData.pokemonSearchResults);
 
-  const api = new PokemonClient();
+  const pokemonApi = new PokemonClient();
+  const evolutionApi = new EvolutionClient(); // create a EncounterClient
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (searchText) {
       getPokemon(searchText);
+      getEvolutions();
     }
   }, [debouncedValue]);
 
   const getPokemon = async (searchText: string) => {
-    const pokemonResponse: Pokemon = await api.getPokemonByName(searchText);
+    const pokemonResponse: Pokemon = await pokemonApi.getPokemonByName(searchText);
 
     dispatch(setPokemonSearchResults(pokemonResponse));
     dispatch(addPastSearch(pokemonResponse));
+  };
+
+  const getEvolutions = async () => {
+    const pokemonResponse = await evolutionApi.getEvolutionChainById(1);
+
+    // NEED TO LOOP OVER
+
+    console.log(pokemonResponse);
   };
 
   const closePokemonDetailsModal = useCallback(() => {
