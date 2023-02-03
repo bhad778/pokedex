@@ -20,7 +20,7 @@ const useStyles = (): StyleSheet => {
       display: "flex",
       justifyContent: "center",
       flexWrap: "wrap",
-      gap: "10px 10px",
+      gap: "20px 15px",
       paddingBottom: "100px",
     },
   };

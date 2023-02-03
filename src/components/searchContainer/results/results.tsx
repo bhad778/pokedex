@@ -1,44 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PokemonCard from "components/pokemonCard";
+import { Pokemon } from "pokenode-ts";
 
 import useStyles from "./resultsStyles";
 
-const Results = () => {
-  const styles = useStyles();
+interface ResultsProps {
+  searchText: string;
+  pokemonSearchResults: Pokemon;
+}
 
-  const pokemonData = [
-    {
-      name: "Charizard",
-      type: ["Fire", "Flying"],
-      number: 6,
-      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-    },
-    {
-      name: "Pika",
-      type: ["Fire", "Flying"],
-      number: 25,
-      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-    },
-    {
-      name: "Squirtle",
-      type: ["Fire", "Flying"],
-      number: 9,
-      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-    },
-    {
-      name: "Bulba",
-      type: ["Fire", "Flying"],
-      number: 5,
-      img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-    },
-  ];
+const Results = (props: ResultsProps) => {
+  const { searchText, pokemonSearchResults } = props;
+
+  const styles = useStyles();
 
   const PokemonCardsList = () => {
     return (
       <div style={styles.pokemonCardsList}>
-        {pokemonData.map((pokemon) => (
-          <PokemonCard pokemon={pokemon} />
-        ))}
+        <PokemonCard pokemon={pokemonSearchResults} />
       </div>
     );
   };
