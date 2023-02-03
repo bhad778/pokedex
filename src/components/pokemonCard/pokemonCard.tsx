@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { Card } from "@chakra-ui/react";
 import { Pokemon } from "pokenode-ts";
 import { types } from "types/AppTypes";
 import { Spinner } from "@chakra-ui/react";
@@ -8,12 +8,13 @@ import useStyles from "./pokemonCardStyles";
 
 interface PokemonCardProps {
   pokemon: Pokemon;
+  setSelectedPokemon: (pokemon: Pokemon | undefined) => void;
   height: number;
   width: number;
 }
 
 const PokemonCard = (props: PokemonCardProps) => {
-  const { pokemon, height, width } = props;
+  const { pokemon, setSelectedPokemon, height, width } = props;
 
   const [loading, setLoading] = useState(true);
 
@@ -38,8 +39,12 @@ const PokemonCard = (props: PokemonCardProps) => {
     setLoading(false);
   }, []);
 
+  const showPokemonDetails = useCallback(() => {
+    setSelectedPokemon(pokemon);
+  }, []);
+
   return (
-    <Card style={styles.pokemonCard}>
+    <Card style={styles.pokemonCard} onClick={showPokemonDetails}>
       <span style={styles.pokemonName}>{capitalizeFirstLetter(pokemon.name)}</span>
       {loading && <Spinner />}
       <img src={pokemon?.sprites?.front_default || undefined} onLoad={onImageLoaded} width="100%" height="100%" />

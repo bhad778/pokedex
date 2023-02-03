@@ -1,15 +1,18 @@
-import React, { memo, useCallback, useState } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import React, { memo } from "react";
 import { Pokemon } from "pokenode-ts";
 
+import useStyles from "./pokemonDetailsStyles";
+
 interface PokemonDetailsProps {
-  pokemon: Pokemon;
+  pokemon: Pokemon | undefined;
 }
 
-const PokemonDetails = (props: PokemonCardProps) => {
+const PokemonDetails = (props: PokemonDetailsProps) => {
   const { pokemon } = props;
 
-  return <div style={styles.pokemonDetailsContainer}></div>;
+  const styles = useStyles();
+
+  return <div style={styles.pokemonDetailsContainer}>hey</div>;
 };
 
 export default memo(PokemonDetails);

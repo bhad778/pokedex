@@ -8,11 +8,15 @@ import { RootState } from "reduxStore/store";
 import { useSelector, useDispatch } from "react-redux";
 import { setPokemonSearchResults, addPastSearch } from "reduxStore/pokemonSearch/pokemonSearchSlice";
 import useDebounce from "utils/useDebounce";
+import PokemonDetails from "components/pokemonDetails";
 
 import useStyles from "./searchContainerStyles";
+import { Modal, ModalOverlay } from "@chakra-ui/react";
 
 const SearchContainer = () => {
   const [searchText, setSearchText] = useState("");
+  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | undefined>();
+  // const [isPokemonDetailsModalOpen, setIsPokemonDetailsModalOpen] = useState(false);
 
   const debouncedValue = useDebounce<string>(searchText, 500);
 
@@ -35,6 +39,10 @@ const SearchContainer = () => {
     dispatch(addPastSearch(pokemonResponse));
   };
 
+  const closePokemonDetailsModal = useCallback(() => {
+    setSelectedPokemon(undefined);
+  }, []);
+
   const styles = useStyles();
 
   return (
@@ -44,11 +52,15 @@ const SearchContainer = () => {
         <Search searchText={searchText} setSearchText={setSearchText} />
       </div>
       <div style={styles.resultsContainer}>
-        <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} />
+        <Results pokemonSearchResults={pokemonSearchResults} searchText={searchText} setSelectedPokemon={setSelectedPokemon} />
       </div>
       <div style={styles.resultsContainer}>
-        <PastSearches />
+        <PastSearches setSelectedPokemon={setSelectedPokemon} />
       </div>
+      <Modal isOpen={!!selectedPokemon} onClose={closePokemonDetailsModal}>
+        <ModalOverlay />
+        <PokemonDetails pokemon={selectedPokemon} />
+      </Modal>
     </div>
   );
 };

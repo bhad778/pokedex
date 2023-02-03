@@ -7,10 +7,11 @@ import useStyles from "./resultsStyles";
 interface ResultsProps {
   searchText: string;
   pokemonSearchResults: Pokemon;
+  setSelectedPokemon: (pokemon: Pokemon | undefined) => void;
 }
 
 const Results = (props: ResultsProps) => {
-  const { pokemonSearchResults } = props;
+  const { pokemonSearchResults, setSelectedPokemon } = props;
 
   const styles = useStyles();
 
@@ -18,7 +19,7 @@ const Results = (props: ResultsProps) => {
     const { pokemonSearchResults } = props;
     return (
       <div style={styles.pokemonCardsList}>
-        <PokemonCard pokemon={pokemonSearchResults} height={300} width={320} />
+        <PokemonCard pokemon={pokemonSearchResults} setSelectedPokemon={setSelectedPokemon} height={300} width={320} />
       </div>
     );
   });
