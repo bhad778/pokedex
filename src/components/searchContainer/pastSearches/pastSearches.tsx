@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo } from "react";
 import PokemonCard from "components/pokemonCard";
 import { Pokemon } from "types/AppTypes";
 import { useSelector } from "react-redux";
@@ -21,8 +21,8 @@ const PastSearches = (props: PastSearchesProps) => {
     const { pastSearches } = props;
     return (
       <div style={styles.pokemonCardsList}>
-        {pastSearches.map((pokemon: Pokemon) => (
-          <PokemonCard pokemon={pokemon} setSelectedPokemon={setSelectedPokemon} height={130} width={150} />
+        {pastSearches.map((pokemon: Pokemon, index: number) => (
+          <PokemonCard pokemon={pokemon} setSelectedPokemon={setSelectedPokemon} height={130} width={150} key={index} />
         ))}
       </div>
     );

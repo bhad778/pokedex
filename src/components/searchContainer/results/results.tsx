@@ -17,9 +17,9 @@ const Results = (props: ResultsProps) => {
 
   const returnEvolutionCards = () => {
     if (pokemonSearchResults.evolutions) {
-      return pokemonSearchResults.evolutions.map((evolution: Pokemon) => {
+      return pokemonSearchResults.evolutions.map((evolution: Pokemon, index: number) => {
         return (
-          <span style={styles.evolutionContainer}>
+          <span style={styles.evolutionContainer} key={index}>
             <PokemonCard pokemon={evolution} setSelectedPokemon={setSelectedPokemon} height={100} width={110} />
           </span>
         );

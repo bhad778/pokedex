@@ -38,13 +38,13 @@ const PokemonCard = (props: PokemonCardProps) => {
 
   const showPokemonDetails = useCallback(() => {
     setSelectedPokemon(pokemon);
-  }, []);
+  }, [pokemon, setSelectedPokemon]);
 
   return (
     <Card style={styles.pokemonCard} onClick={showPokemonDetails}>
       <span style={styles.pokemonName}>{capitalizeFirstLetter(pokemon.name)}</span>
       {loading && <Spinner />}
-      <img src={pokemon?.sprites?.front_default || undefined} onLoad={onImageLoaded} width="100%" height="100%" />
+      <img src={pokemon?.sprites?.front_default || undefined} onLoad={onImageLoaded} width="100%" height="100%" alt="" />
     </Card>
   );
 };

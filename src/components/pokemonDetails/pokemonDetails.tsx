@@ -36,9 +36,9 @@ const PokemonDetails = (props: PokemonDetailsProps) => {
   };
 
   const returnTypeTags = () => {
-    return pokemon?.types.map((item: any) => {
+    return pokemon?.types.map((item: any, index: number) => {
       return (
-        <Tag marginLeft="1" backgroundColor={typeColors[item.type.name as types]}>
+        <Tag key={index} marginLeft="1" backgroundColor={typeColors[item.type.name as types]}>
           {item.type.name}
         </Tag>
       );
@@ -46,14 +46,14 @@ const PokemonDetails = (props: PokemonDetailsProps) => {
   };
 
   const returnAbilities = () => {
-    return pokemon?.abilities.map((item: any) => {
-      return <div>{item.ability.name}</div>;
+    return pokemon?.abilities.map((item: any, index: number) => {
+      return <div key={index}>{item.ability.name}</div>;
     });
   };
 
   const returnMoves = () => {
-    return pokemon?.moves.map((item: any) => {
-      return <div>{item.move.name}</div>;
+    return pokemon?.moves.map((item: any, index: number) => {
+      return <div key={index}>{item.move.name}</div>;
     });
   };
 
@@ -63,9 +63,9 @@ const PokemonDetails = (props: PokemonDetailsProps) => {
       <div style={styles.types}>{returnTypeTags()}</div>
       {loading && <Spinner />}
       <div style={styles.sprites}>
-        <img src={pokemon?.sprites?.front_default || undefined} onLoad={onImageLoaded} width="250px" height="250px" />
-        <img src={pokemon?.sprites?.back_default || undefined} width="250px" height="250px" />
-        <img src={pokemon?.sprites?.front_shiny || undefined} width="250px" height="250px" />
+        <img src={pokemon?.sprites?.front_default || undefined} onLoad={onImageLoaded} width="250px" height="250px" alt="" />
+        <img src={pokemon?.sprites?.back_default || undefined} width="250px" height="250px" alt="" />
+        <img src={pokemon?.sprites?.front_shiny || undefined} width="250px" height="250px" alt="" />
       </div>
       <div style={styles.details}>
         <div style={styles.abilities}>
